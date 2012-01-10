@@ -6,13 +6,6 @@ if not pygame.mixer: print 'Warning, sound disabled'
 
 height = 600
 width = 600
-#What i gonna need:
-
-#   *startmenu 
-#   *scoresystem
-#   *restartsystem
-#   *more bombs
-#   *smaller bombs
 
 def load_image(name, colorkey=None):
     fullname = os.path.join('data', name)
