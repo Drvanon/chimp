@@ -151,20 +151,7 @@ class Game_over(pygame.sprite.Sprite):
         self.image, self.rect = load_image('game_over.png', -1)
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
-        self.rect.topleft = 0, 0
-
-class MainMenu(pygame.sprite.Sprite):
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.image, self.rect = load_image('MainMenu.png', -1)
-        screen = pygame.display.get_surface()
-        self.area = screen.get_rect()
-        self.rect.topleft = 0, 0
-        self.start_game = 0
-        
-    def _Button_clicked(self):
-        self.start_game = 1
-        
+        self.rect.topleft = 0, 0        
             
 def main():
     pygame.init()
@@ -188,15 +175,12 @@ def main():
     
     screen.blit(background, (0, 0))
     pygame.display.flip()
-    
+    allsprites = pygame.sprite.RenderPlain((fist, chimp, bomb))
     clock = pygame.time.Clock()
     whiff_sound = load_sound('whiff.wav')
     punch_sound = load_sound('punch.wav')
 
-    while 1:
-         if mainmenu.BC == 1:
-                 allsprites = pygame.sprite.RenderPlain((fist, chimp, bomb))
-             
+    while 1:             
          clock.tick(60)                
          
          TimesHit = chimp.TimesHit
