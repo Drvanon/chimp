@@ -166,12 +166,12 @@ class Button(pygame.sprite.Sprite):
         self.a = 0
     
     def update(self):
-        self._ButtonClicked()
+        self._click()
         
     def _click(self):
         hitbox = self.rect.inflate(-5, -5)
         pos = pygame.mouse.get_pos()
-        if hitbox.colliderect(pos):
+        if hitbox.collidepoint(pos):
             self.a = 1      
 
 def main():
@@ -203,6 +203,8 @@ def main():
     allsprites = pygame.sprite.RenderPlain((fist, chimp, bomb)) 
 
     while 1:
+         if not button.a:
+             button.update()
          if button.a == 1:
              main_menu.start_game = 1
              
@@ -229,7 +231,12 @@ def main():
              if event.type == QUIT:
                  return
              elif event.type == KEYDOWN and event.key == K_ESCAPE:
-                 return
+                 button.a  = 0
+                 main_menu.start_game = 0 
+                 background.fill((88, 87, 70))
+                 render_main_menu = pygame.sprite.RenderPlain((button))
+                 render_main_menu.draw(screen)
+                 pygame.display.flip()                
              elif event.type == MOUSEBUTTONDOWN:
                  if main_menu.start_game == 1:
                      if fist.punch(chimp):
