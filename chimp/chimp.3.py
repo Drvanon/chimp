@@ -150,16 +150,31 @@ class Game_over(pygame.sprite.Sprite):
 class MainMenu(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image, self.rect = load_image('MainMenu.png', -1)
-        screen = pygame.display.get_surface()
-        self.area = screen.get_rect()
-        self.rect.topleft = 0, 0
         self.start_game = 0
         
-    def _Button_clicked(self):
+    def _ButtonClicked(self):
         self.start_game = 1
         
-            
+        
+class Button(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image, self.rect = load_image('bomb.png', -1)
+        screen = pygame.display.get_surface()
+        self.area = screen.get_rect()
+        self.rect.topleft = 0, 300
+        self.a = 0
+    
+    def update(self):
+        self._ButtonClicked()
+        
+    def _click(self):
+        hitbox = self.rect.inflate(-5, -5)
+        pos = pygame.mouse.get_pos()
+        if hitbox.colliderect(pos):
+            self.a = 1      
+     
+                        
 def main():
     pygame.init()
     screen = pygame.display.set_mode((width, height))
@@ -167,23 +182,18 @@ def main():
     pygame.mouse.set_visible(0)
     background = pygame.Surface(screen.get_size())
     background = background.convert()
-    background.fill((250, 250, 250))
+    background.fill((88, 87, 70))
     
     chimp = Chimp()
     fist = Fist()
     bomb = Bomb()
     game_over = Game_over()
     main_menu = MainMenu()                    
+    button = Button()
     
-    render_main_menu = pygame.sprite.RenderPlain((main_menu))
+    render_main_menu = pygame.sprite.RenderPlain((button))
     render_main_menu.draw(screen)
     pygame.display.flip()
-    
-    if pygame.font:
-        font = pygame.font.Font(None, 36)
-        text = font.render("Pummel The Chimp, And Win $$$" , 1, (10, 10, 10,))
-        textpos = text.get_rect(centerx=background.get_width()/2)
-        background.blit(text, textpos)
     
     screen.blit(background, (0, 0))
     pygame.display.flip()
@@ -191,9 +201,22 @@ def main():
     clock = pygame.time.Clock()
     whiff_sound = load_sound('whiff.wav')
     punch_sound = load_sound('punch.wav')
-    allsprites = None
+    allsprites = pygame.sprite.RenderPlain((fist, chimp, bomb)) 
 
     while 1:
+         if button.a == 1:
+             main_menu.start_game = 1
+             
+         if main_menu.start_game:
+             if pygame.font:
+                 background.fill((250, 250, 250))
+                 screen.blit(background, (0, 0))
+                 font = pygame.font.Font(None, 36)
+                 text = font.render(" times punched: %d, times hit: %d" % (TimesPunched, TimesHit) , 1, (10, 10, 10,))
+                 textpos = [100, 300]
+                 background.blit(text, textpos)
+                 screen.blit(background, (0, 0))
+         
          if not main_menu.start_game:
              pygame.mouse.set_visible(1)   
          clock.tick(60)                
@@ -201,16 +224,6 @@ def main():
          TimesHit = chimp.TimesHit
          TimesPunched = fist.TimesPunched     
          
-         if pygame.font:
-            background.fill((250, 250, 250))
-            screen.blit(background, (0, 0))
-            font = pygame.font.Font(None, 36)
-            text = font.render(" times punched: %d, times hit: %d" % (TimesPunched, TimesHit) , 1, (10, 10, 10,))
-            textpos = [100, 300]
-            background.blit(text, textpos)
-            screen.blit(background, (0, 0))
-         
-         SGB = Rect(147, 116, 319, 80)
          
          for event in pygame.event.get():    
              if event.type == QUIT:
@@ -218,10 +231,6 @@ def main():
              elif event.type == KEYDOWN and event.key == K_ESCAPE:
                  return
              elif event.type == MOUSEBUTTONDOWN:
-                 if main_menu.start_game == 0:
-                     pos = pygame.mouse.get_pos()
-                     if SGB.collidepoint(pos):
-                         allsprites = pygame.sprite.RenderPlain((fist, chimp, bomb))
                  if main_menu.start_game == 1:
                      if fist.punch(chimp):
                          punch_sound.play()
@@ -255,7 +264,7 @@ def main():
             bomb.hit = 0
          
          else:                                                            
-            if allsprites:
+            if main_menu.start_game == 1:
                 allsprites.update()
                 screen.blit(background, (0, 0))
                 allsprites.draw(screen)
