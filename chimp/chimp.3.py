@@ -205,8 +205,6 @@ def main():
     while 1:
          if not button.a:
              button.update()
-         if button.a == 1:
-             main_menu.start_game = 1
              
          if main_menu.start_game:
              if pygame.font:
@@ -238,6 +236,8 @@ def main():
                  render_main_menu.draw(screen)
                  pygame.display.flip()                
              elif event.type == MOUSEBUTTONDOWN:
+                 if button.a == 1:
+                    main_menu.start_game = 1
                  if main_menu.start_game == 1:
                      if fist.punch(chimp):
                          punch_sound.play()
