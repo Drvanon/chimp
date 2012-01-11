@@ -177,7 +177,7 @@ class Button(pygame.sprite.Sprite):
 def topscore():
     os.open(data/topscores.txt)
     global TimesPunched, TimesHit
-    os.write('%d, %d' %(TimesPunched, TimesHit )) 
+    os.write(data/topscores, '1') 
     
 def main():
     pygame.init()
