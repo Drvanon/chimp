@@ -174,10 +174,10 @@ class Button(pygame.sprite.Sprite):
         if hitbox.collidepoint(pos):
             self.a = 1      
 
-def topscore():
+def highscore():
     os.open(data/topscores.txt)
     global TimesPunched, TimesHit
-    os.write(data/topscores, '1') 
+    os.write(data/topscores.txt, '1') 
     
 def main():
     pygame.init()
@@ -263,7 +263,7 @@ def main():
                 bomb.colliderate = 0
                 fist.TimesPunched = 0
                 chimp.TimesHit = 0
-                topscore()
+                highscore()
                 
          if bomb._collider(fist):
              bomb.hit = 1
@@ -278,7 +278,7 @@ def main():
             render_game_over.draw(screen)
             pygame.display.flip()
             bomb.hit = 0
-            topscore()
+            highscore()
          
          else:                                                            
             if main_menu.start_game == 1:
