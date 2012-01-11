@@ -159,10 +159,10 @@ class MainMenu(pygame.sprite.Sprite):
 class Button(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image, self.rect = load_image('bomb.png', -1)
+        self.image, self.rect = load_image('button.png', -1)
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
-        self.rect.topleft = 0, 300
+        self.rect.topleft = 0, 0
         self.a = 0
     
     def update(self):
@@ -173,8 +173,7 @@ class Button(pygame.sprite.Sprite):
         pos = pygame.mouse.get_pos()
         if hitbox.colliderect(pos):
             self.a = 1      
-     
-                        
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((width, height))
@@ -191,11 +190,11 @@ def main():
     main_menu = MainMenu()                    
     button = Button()
     
-    render_main_menu = pygame.sprite.RenderPlain((button))
-    render_main_menu.draw(screen)
+    screen.blit(background, (0, 0))
     pygame.display.flip()
     
-    screen.blit(background, (0, 0))
+    render_main_menu = pygame.sprite.RenderPlain((button))
+    render_main_menu.draw(screen)
     pygame.display.flip()
     
     clock = pygame.time.Clock()
@@ -219,6 +218,7 @@ def main():
          
          if not main_menu.start_game:
              pygame.mouse.set_visible(1)   
+         
          clock.tick(60)                
          
          TimesHit = chimp.TimesHit
