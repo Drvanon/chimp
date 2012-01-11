@@ -15,6 +15,7 @@ def load_image(name, colorkey=None):
         print "Cannot load image: ", fullname
         raise SystemExit, message
     image = image.convert()
+    
     if colorkey is not None:
         if colorkey is -1:
             colorkey = image.get_at((0,0))
