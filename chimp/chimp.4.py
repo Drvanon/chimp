@@ -7,8 +7,6 @@ if not pygame.mixer: print 'Warning, sound disabled'
 height = 600
 width = 600
 
-#how will i add the highscore? it's pretty hard...
-
 def load_image(name, colorkey=None):
     fullname = os.path.join('data', name)
     try:
