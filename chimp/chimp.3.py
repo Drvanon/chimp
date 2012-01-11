@@ -162,7 +162,7 @@ class Button(pygame.sprite.Sprite):
         self.image, self.rect = load_image('button.png', -1)
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
-        self.rect.topleft = 0, 0
+        self.rect.topleft = 160, 0
         self.a = 0
     
     def update(self):
@@ -206,6 +206,9 @@ def main():
          if not button.a:
              button.update()
              
+         if button.a:
+             pygame.mouse.set_visible(0)
+                 
          if main_menu.start_game:
              if pygame.font:
                  background.fill((250, 250, 250))
