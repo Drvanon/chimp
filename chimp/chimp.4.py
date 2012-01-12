@@ -227,10 +227,10 @@ def main():
          
          clock.tick(60)                
          
-         global TimesHit
          TimesHit = chimp.TimesHit
          TimesPunched = fist.TimesPunched     
          
+         global TimesHit
          
          for event in pygame.event.get():    
              if event.type == QUIT:
