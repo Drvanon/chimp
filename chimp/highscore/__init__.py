@@ -16,5 +16,6 @@ def TimesPlayed(timesplayed = 0):
     current_line = timesplayed
     
 def historic(current_line, score, name):
+    TimesPlayed()
     rewind(current_file)
     print_a_line(current_line, score, name)
