@@ -4,18 +4,19 @@ def print_all(f):
 def rewind(f):
     f.seek(0)
 
-def print_a_line(line_count, f):
-    print line_count, f.readline()
+def print_a_line(f, name):
+    int(TimesHit)
+    f.write(TimesHit, name)
 
 def DefineFile():    
     global current_file
-    current_file = open('highscores.txt')
+    current_file = open('highscores.txt', 'w')
 
 def TimesPlayed(timesplayed = 0):
     global current_line
     current_line = timesplayed
     
-def historic(current_line, score, name):
+def historic(score, name):
     TimesPlayed()
     rewind(current_file)
-    print_a_line(current_line, score, name)
+    print_a_line(score, name)

@@ -227,6 +227,7 @@ def main():
          
          clock.tick(60)                
          
+         global TimesHit
          TimesHit = chimp.TimesHit
          TimesPunched = fist.TimesPunched     
          
@@ -265,7 +266,7 @@ def main():
          if bomb._collider(fist):
              bomb.hit = 1
              bomb._kaboom()
-             highscore.historic(0, TimesHit, 'rob')
+             highscore.historic(TimesHit, 'rob')
          
          if bomb.colliderate == 1:
             background.fill((0, 0, 0))
