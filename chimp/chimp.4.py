@@ -176,6 +176,8 @@ class Button(pygame.sprite.Sprite):
         pos = pygame.mouse.get_pos()
         if hitbox.collidepoint(pos):
             self.a = 1      
+
+TimesHit = 0
     
 def main():
     pygame.init()
@@ -266,7 +268,7 @@ def main():
          if bomb._collider(fist):
              bomb.hit = 1
              bomb._kaboom()
-             highscore.historic(TimesHit, 'rob')
+             highscore.historic(highscore.DefineFile(), TimesHit, 'rob')
          
          if bomb.colliderate == 1:
             background.fill((0, 0, 0))
