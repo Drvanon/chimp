@@ -1,5 +1,6 @@
 import os, pygame, sys, time
 from pygame.locals import *
+import highscore
 
 if not pygame.font: print 'Warning, fonts disabled'
 if not pygame.mixer: print 'Warning, sound disabled'
@@ -173,11 +174,6 @@ class Button(pygame.sprite.Sprite):
         pos = pygame.mouse.get_pos()
         if hitbox.collidepoint(pos):
             self.a = 1      
-
-def highscore():
-    os.open(data/topscores.txt)
-    global TimesPunched, TimesHit
-    os.write(data/topscores.txt, '1') 
     
 def main():
     pygame.init()
@@ -263,7 +259,6 @@ def main():
                 bomb.colliderate = 0
                 fist.TimesPunched = 0
                 chimp.TimesHit = 0
-                highscore()
                 
          if bomb._collider(fist):
              bomb.hit = 1
@@ -278,7 +273,6 @@ def main():
             render_game_over.draw(screen)
             pygame.display.flip()
             bomb.hit = 0
-            highscore()
          
          else:                                                            
             if main_menu.start_game == 1:
