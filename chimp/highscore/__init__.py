@@ -4,9 +4,12 @@ def print_all(f):
 def rewind(f):
     f.seek(0)
 
-def print_a_line(f, name, score):
+def print_a_line(name, score):
+    higscore = open('highscore.txt')
     score = str(score)
-    f.write(score, name)
+    higscore.write(score)
+    higscore.write('\t')
+    higscore.write('name')
 
 def DefineFile():    
     global current_file
@@ -16,7 +19,7 @@ def TimesPlayed(timesplayed = 0):
     global current_line
     current_line = timesplayed
     
-def historic(f, score, name):
+def historic(score, name):
     TimesPlayed()
     rewind(current_file)
-    print_a_line(score, name, score)
+    print_a_line(name, score)

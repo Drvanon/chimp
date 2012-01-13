@@ -232,8 +232,6 @@ def main():
          TimesHit = chimp.TimesHit
          TimesPunched = fist.TimesPunched     
          
-         global TimesHit
-         
          for event in pygame.event.get():    
              if event.type == QUIT:
                  return
@@ -268,7 +266,7 @@ def main():
          if bomb._collider(fist):
              bomb.hit = 1
              bomb._kaboom()
-             highscore.historic(highscore.DefineFile(), TimesHit, 'rob')
+             highscore.historic(TimesHit, 'rob')
          
          if bomb.colliderate == 1:
             background.fill((0, 0, 0))
