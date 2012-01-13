@@ -43,23 +43,23 @@ def main():
 
     while 1:
         if not button.a:
-             button.update()
+            button.update()
              
         if button.a:
-             pygame.mouse.set_visible(0)
+            pygame.mouse.set_visible(0)
                  
         if main_menu.start_game:
-             if pygame.font:
-                 background.fill((250, 250, 250))
-                 screen.blit(background, (0, 0))
-                 font = pygame.font.Font(None, 36)
-                 text = font.render(" times punched: %d, times hit: %d" % (TimesPunched, TimesHit) , 1, (10, 10, 10,))
-                 textpos = [100, 300]
-                 background.blit(text, textpos)
-                 screen.blit(background, (0, 0))
+            if pygame.font:
+                background.fill((250, 250, 250))
+                screen.blit(background, (0, 0))
+                font = pygame.font.Font(None, 36)
+                text = font.render(" times punched: %d, times hit: %d" % (TimesPunched, TimesHit) , 1, (10, 10, 10,))
+                textpos = [100, 300]
+                background.blit(text, textpos)
+                screen.blit(background, (0, 0))
          
         if not main_menu.start_game:
-             pygame.mouse.set_visible(1)   
+            pygame.mouse.set_visible(1)   
          
         clock.tick(60)                
          
@@ -67,27 +67,27 @@ def main():
         TimesPunched = fist.TimesPunched     
          
         for event in pygame.event.get():    
-             if event.type == QUIT:
-                 return
-             elif event.type == KEYDOWN and event.key == K_ESCAPE:
-                 button.a  = 0
-                 main_menu.start_game = 0 
-                 background.fill((88, 87, 70))
-                 render_main_menu = pygame.sprite.RenderPlain((button))
-                 render_main_menu.draw(screen)
-                 pygame.display.flip()                
-             elif event.type == MOUSEBUTTONDOWN:
-                 if button.a == 1:
+            if event.type == QUIT:
+                return
+            elif event.type == KEYDOWN and event.key == K_ESCAPE:
+                button.a  = 0
+                main_menu.start_game = 0 
+                background.fill((88, 87, 70))
+                render_main_menu = pygame.sprite.RenderPlain((button))
+                render_main_menu.draw(screen)
+                pygame.display.flip()                
+            elif event.type == MOUSEBUTTONDOWN:
+                if button.a == 1:
                     main_menu.start_game = 1
-                 if main_menu.start_game == 1:
-                     if fist.punch(chimp):
-                         punch_sound.play()
-                         chimp.punched()
-                     else:
-                         whiff_sound.play()
-             elif event.type is MOUSEBUTTONUP:
-                 fist.unpunch()
-             elif event.type == KEYDOWN and event.key == K_r:
+                if main_menu.start_game == 1:
+                    if fist.punch(chimp):
+                        punch_sound.play()
+                        chimp.punched()
+                    else:
+                        whiff_sound.play()
+            elif event.type is MOUSEBUTTONUP:
+                fist.unpunch()
+            elif event.type == KEYDOWN and event.key == K_r:
                 pygame.mouse.set_visible(0)        
                 allsprites.update()
                 screen.blit(background, (0, 0))
@@ -99,9 +99,9 @@ def main():
                 added = 0 
                 
         if bomb._collider(fist):
-             bomb.hit = 1
-             bomb._kaboom()
-             if added == 0:
+            bomb.hit = 1
+            bomb._kaboom()
+            if added == 0:
                 highscore.historic(TimesHit, 'rob')
                 added = 1
                 
