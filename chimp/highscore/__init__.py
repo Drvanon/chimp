@@ -5,11 +5,11 @@ def rewind(f):
     f.seek(0)
 
 def print_a_line(name, score):
-    higscore = open('highscore.txt')
+    higscore = open('highscores.txt', 'w')
     score = str(score)
     higscore.write(score)
     higscore.write('\t')
-    higscore.write('name')
+    higscore.write(name)
 
 def DefineFile():    
     global current_file
