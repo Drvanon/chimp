@@ -23,3 +23,7 @@ def historic(score, name):
     TimesPlayed()
     rewind(current_file)
     print_a_line(name, score)
+    
+def newline():
+    h = open('highscore.txt', 'w')
+    h.write('\n')

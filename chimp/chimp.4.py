@@ -258,6 +258,7 @@ def main():
                 allsprites.update()
                 screen.blit(background, (0, 0))
                 allsprites.draw(screen)
+                highscore.newline()
                 pygame.display.flip()        
                 bomb.colliderate = 0
                 fist.TimesPunched = 0
