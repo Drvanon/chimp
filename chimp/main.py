@@ -9,36 +9,6 @@ if not pygame.mixer: print 'Warning, sound disabled'
 height = 600
 width = 600
 
-
-def load_image(name, colorkey=None):
-    fullname = os.path.join('data', name)
-    try:
-        image = pygame.image.load(fullname)
-    except pygame.error, message:
-        print "Cannot load image: ", fullname
-        raise SystemExit, message
-    image = image.convert()
-    
-    if colorkey is not None:
-        if colorkey is -1:
-            colorkey = image.get_at((0,0))
-        image.set_colorkey(colorkey, RLEACCEL)
-    return image, image.get_rect()
-    
-def load_sound(name):
-    class NoneSound:
-        def play(self): pass
-    if not pygame.mixer or not pygame.mixer.get_init():
-        return NoneSound()        
-    fullname = os.path.join('data', name)
-    try:
-        sound = pygame.mixer.Sound(fullname)
-    except pygame.error, message:
-        print 'Cannot load sound:', fullname
-        raise SystemExit, message 
-    return sound
-
-
 TimesHit = 0
     
 def main():
@@ -72,13 +42,13 @@ def main():
     allsprites = pygame.sprite.RenderPlain((fist, chimp, bomb)) 
 
     while 1:
-         if not button.a:
+        if not button.a:
              button.update()
              
-         if button.a:
+        if button.a:
              pygame.mouse.set_visible(0)
                  
-         if main_menu.start_game:
+        if main_menu.start_game:
              if pygame.font:
                  background.fill((250, 250, 250))
                  screen.blit(background, (0, 0))
@@ -88,15 +58,15 @@ def main():
                  background.blit(text, textpos)
                  screen.blit(background, (0, 0))
          
-         if not main_menu.start_game:
+        if not main_menu.start_game:
              pygame.mouse.set_visible(1)   
          
-         clock.tick(60)                
+        clock.tick(60)                
          
-         TimesHit = chimp.TimesHit
-         TimesPunched = fist.TimesPunched     
+        TimesHit = chimp.TimesHit
+        TimesPunched = fist.TimesPunched     
          
-         for event in pygame.event.get():    
+        for event in pygame.event.get():    
              if event.type == QUIT:
                  return
              elif event.type == KEYDOWN and event.key == K_ESCAPE:
@@ -128,14 +98,14 @@ def main():
                 chimp.TimesHit = 0
                 added = 0 
                 
-         if bomb._collider(fist):
+        if bomb._collider(fist):
              bomb.hit = 1
              bomb._kaboom()
              if added == 0:
                 highscore.historic(TimesHit, 'rob')
                 added = 1
                 
-         if bomb.colliderate == 1:
+        if bomb.colliderate == 1:
             background.fill((0, 0, 0))
             screen.blit(background, (0, 0))
             time.sleep(1)
@@ -145,12 +115,11 @@ def main():
             pygame.display.flip()
             bomb.hit = 0
          
-         else:                                                            
+        else:                                                            
             if main_menu.start_game == 1:
                 allsprites.update()
                 screen.blit(background, (0, 0))
                 allsprites.draw(screen)
                 pygame.display.flip()       
-
                                 
 if __name__=='__main__': main()
