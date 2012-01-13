@@ -8,7 +8,7 @@ if not pygame.mixer: print 'Warning, sound disabled'
 height = 600
 width = 600
 
-highscore.DefineFile()
+added = 0 
 
 def load_image(name, colorkey=None):
     fullname = os.path.join('data', name)
@@ -258,17 +258,19 @@ def main():
                 allsprites.update()
                 screen.blit(background, (0, 0))
                 allsprites.draw(screen)
-                highscore.newline()
                 pygame.display.flip()        
                 bomb.colliderate = 0
                 fist.TimesPunched = 0
                 chimp.TimesHit = 0
+                added = 0 
                 
          if bomb._collider(fist):
              bomb.hit = 1
              bomb._kaboom()
-             highscore.historic(TimesHit, 'rob')
-         
+             if added == 0:
+                highscore.historic(TimesHit, 'rob')
+                added = 1
+                
          if bomb.colliderate == 1:
             background.fill((0, 0, 0))
             screen.blit(background, (0, 0))
