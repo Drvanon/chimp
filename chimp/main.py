@@ -1,7 +1,7 @@
 import os, pygame, sys, time
 from pygame.locals import *
 import highscore
-from Sprites import *
+from sprites import *
 
 if not pygame.font: print 'Warning, fonts disabled'
 if not pygame.mixer: print 'Warning, sound disabled'
