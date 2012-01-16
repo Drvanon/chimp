@@ -103,7 +103,7 @@ def main():
             bomb.hit = 1
             bomb._kaboom()
             if added == 0:
-                highscore.historic(TimesHit, 'rob')
+                highscore.historic(TimesHit, ask(screen, 'name'))
                 added = 1
                 
         if bomb.colliderate == 1:

@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 
-def get_event():
+def get_key():
     event = pygame.event.poll()
     if event.type == KEYDOWN:
         return event.type
@@ -19,14 +19,15 @@ def display_box(screen, message):
                     (screen.get_height() / 2) - 12,
                     204,24), 1)
     if len(message) != 0:
-    screen.blit(fontobject.render(message, 1, (255,255,255)),
+        screen.blit(fontobject.render(message, 1, (255,255,255)),
                 ((screen.get_width() / 2) - 100, (screen.get_height() / 2) - 10))
     pygame.display.flip()
     
 def ask(screen, question):
     pygame.font.init()
     current_string = []
-    display_box(screen, question + ": " + string.join(current_string,""))
+    string = []
+    display_box(screen, question + ": " + string.join(current_string))
     while 1:
         inkey = get_key()
         if inkey == K_BACKSPACE:
@@ -37,7 +38,8 @@ def ask(screen, question):
             current_string.append("_")
         elif inkey <= 127:
             current_string.append(chr(inkey))
-            display_box(screen, question + ": " + string.join(current_string,""))
-            return string.join(current_string,"")
-        
-        
+            b = ''
+            for letters in string:
+                b = b + letters 
+            display_box(screen, question + ": " + b.join(current_string,""))
+            return string.join(current_string, "")
