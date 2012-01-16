@@ -2,6 +2,7 @@ import os, pygame, sys, time
 from pygame.locals import *
 import highscore
 from sprites import *
+from textbox import *
 
 if not pygame.font: print 'Warning, fonts disabled'
 if not pygame.mixer: print 'Warning, sound disabled'
@@ -112,6 +113,7 @@ def main():
             pygame.display.flip()                         
             render_game_over = pygame.sprite.RenderPlain((game_over))
             render_game_over.draw(screen)
+            print ask(screen, "Name") + " was entered"
             pygame.display.flip()
             bomb.hit = 0
          
