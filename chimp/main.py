@@ -113,7 +113,7 @@ def main():
             pygame.display.flip()                         
             render_game_over = pygame.sprite.RenderPlain((game_over))
             render_game_over.draw(screen)
-            print ask(screen, "Name") + " was entered"
+            ask(screen, "Name")
             pygame.display.flip()
             bomb.hit = 0
          
