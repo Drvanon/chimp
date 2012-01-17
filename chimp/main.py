@@ -12,6 +12,8 @@ width = 600
 
 TimesHit = 0
     
+filled_in = False
+     
 def main():
     pygame.init()
     screen = pygame.display.set_mode((width, height))
@@ -103,7 +105,8 @@ def main():
             bomb.hit = 1
             bomb._kaboom()
             if added == 0:
-                highscore.historic(TimesHit, ask(screen, 'name'))
+                a = ask(screen, 'Name')
+                highscore.historic(TimesHit, a)
                 added = 1
                 
         if bomb.colliderate == 1:
@@ -113,7 +116,6 @@ def main():
             pygame.display.flip()                         
             render_game_over = pygame.sprite.RenderPlain((game_over))
             render_game_over.draw(screen)
-            ask(screen, "Name")
             pygame.display.flip()
             bomb.hit = 0
          

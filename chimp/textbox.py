@@ -43,16 +43,22 @@ def ask(screen, question):
     "ask(screen, question) -> answer"
     pygame.font.init()
     current_string = []
-    display_box(screen, question + ": " + string.join(current_string))
+    display_box(screen, question + ": " + string.join(current_string))  
+    filled_in = False  
     while 1:
+        if filled_in:
+            break
         inkey = get_key()
         if inkey == K_BACKSPACE:
             current_string = current_string[0:-1]
         elif inkey == K_RETURN:
-            break
+            filled_in = True
         elif inkey == K_MINUS:
-            current_string.append("_")
+            current_string.append('-')
         elif inkey <= 127:
             current_string.append(chr(inkey))
-            display_box(screen, question + ": " + string.join(current_string))
-            return string.join(current_string)
+            g = question + ": " + string.join(current_string)
+            display_box(screen, g)
+            h = string.join(current_string)
+            print h
+            return h
