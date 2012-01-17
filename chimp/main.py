@@ -11,9 +11,7 @@ height = 600
 width = 600
 
 TimesHit = 0
-    
-filled_in = False
-     
+         
 def main():
     pygame.init()
     screen = pygame.display.set_mode((width, height))

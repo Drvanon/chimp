@@ -51,8 +51,6 @@ def ask(screen, question):
         inkey = get_key()
         if inkey == K_BACKSPACE:
             current_string = current_string[0:-1]
-        elif inkey == K_RETURN:
-            filled_in = True
         elif inkey == K_MINUS:
             current_string.append('-')
         elif inkey <= 127:
@@ -60,5 +58,7 @@ def ask(screen, question):
             g = question + ": " + string.join(current_string)
             display_box(screen, g)
             h = string.join(current_string)
-            print h
-            return h
+        elif inkey == K_RETURN:
+            if h:
+                return h
+                break
