@@ -3,3 +3,6 @@
 3	n
 0	n
 2	,
+2	r o b 
+1	r o b 
+1	r o b 

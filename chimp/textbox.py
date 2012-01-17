@@ -58,7 +58,6 @@ def ask(screen, question):
             g = question + ": " + string.join(current_string)
             display_box(screen, g)
             h = string.join(current_string)
-        elif inkey == K_RETURN:
-            if h:
-                break
-    return h
+            if inkey == K_RETURN:
+                return h
+            
