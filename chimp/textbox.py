@@ -60,5 +60,5 @@ def ask(screen, question):
             h = string.join(current_string)
         elif inkey == K_RETURN:
             if h:
-                return h
                 break
+    return h
