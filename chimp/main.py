@@ -28,15 +28,20 @@ def main():
     bomb = Bomb()
     game_over = Game_over()
     main_menu = MainMenu()                    
-    button = Button()
+    button = StartButton()
+    tbutton = TopscoreButton()
+    
+    menu = button, tbutton
     
     screen.blit(background, (0, 0))
     pygame.display.flip()
     
-    render_main_menu = pygame.sprite.RenderPlain((button))
+    render_main_menu = pygame.sprite.RenderPlain((menu))
     render_main_menu.draw(screen)
     pygame.display.flip()
     
+    print pygame.display.get_surface()
+
     clock = pygame.time.Clock()
     whiff_sound = load_sound('whiff.wav')
     punch_sound = load_sound('punch.wav')
@@ -71,12 +76,8 @@ def main():
             if event.type == QUIT:
                 return
             elif event.type == KEYDOWN and event.key == K_ESCAPE:
-                button.a  = 0
-                main_menu.start_game = 0 
-                background.fill((88, 87, 70))
-                render_main_menu = pygame.sprite.RenderPlain((button))
-                render_main_menu.draw(screen)
-                pygame.display.flip()                
+                return
+                 
             elif event.type == MOUSEBUTTONDOWN:
                 if button.a == 1:
                     main_menu.start_game = 1
@@ -86,8 +87,10 @@ def main():
                         chimp.punched()
                     else:
                         whiff_sound.play()
+                        
             elif event.type is MOUSEBUTTONUP:
                 fist.unpunch()
+                
             elif event.type == KEYDOWN and event.key == K_r:
                 pygame.mouse.set_visible(0)        
                 allsprites.update()
@@ -98,24 +101,27 @@ def main():
                 fist.TimesPunched = 0
                 chimp.TimesHit = 0
                 added = 0 
+                main_menu.start_game = 1
                 
         if bomb._collider(fist):
-            bomb.hit = 1
-            bomb._kaboom()
-            if added == 0:
-                a = ask(screen, 'Name')
-                highscore.historic(TimesHit, a)
-                added = 1
+            if main_menu.start_game:
+                bomb.hit = 1
+                bomb._kaboom()
+                if added == 0:
+                    a = ask(screen, 'Name')
+                    highscore.historic(TimesHit, a)
+                    added = 1
                 
         if bomb.colliderate == 1:
-            background.fill((0, 0, 0))
-            screen.blit(background, (0, 0))
-            time.sleep(1)
-            pygame.display.flip()                         
-            render_game_over = pygame.sprite.RenderPlain((game_over))
-            render_game_over.draw(screen)
-            pygame.display.flip()
-            bomb.hit = 0
+            if main_menu:
+                background.fill((0, 0, 0))
+                screen.blit(background, (0, 0))
+                time.sleep(1)
+                pygame.display.flip()                         
+                render_game_over = pygame.sprite.RenderPlain((game_over))
+                render_game_over.draw(screen)
+                pygame.display.flip()
+                bomb.hit = 0
          
         else:                                                            
             if main_menu.start_game == 1:

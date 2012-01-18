@@ -159,8 +159,25 @@ class MainMenu(pygame.sprite.Sprite):
     def _ButtonClicked(self):
         self.start_game = 1
         
+class TopscoreButton(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image, self.rect = load_image('tbutton.png', -1)
+        screen = pygame.display.get_surface()
+        self.area = screen.get_rect()
+        self.rect.topleft = 160, 50
+        self.a = 0
+    
+    def update(self):
+        self._click()
         
-class Button(pygame.sprite.Sprite):
+    def _click(self):
+        hitbox = self.rect.inflate(-5, -5)
+        pos = pygame.mouse.get_pos()
+        if hitbox.collidepoint(pos):
+            self.a = 1         
+
+class StartButton(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image, self.rect = load_image('button.png', -1)

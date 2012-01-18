@@ -18,7 +18,12 @@
 		<link>
 			<name>data/button.png</name>
 			<type>1</type>
-			<location>/home/drvanon/Pictures/button.png</location>
+			<location>/home/drvanon/git/chimp/chimp/data/button.png</location>
+		</link>
+		<link>
+			<name>data/tbutton.png</name>
+			<type>1</type>
+			<location>/home/drvanon/Pictures/tbutton.png</location>
 		</link>
 	</linkedResources>
 </projectDescription>
