@@ -165,7 +165,7 @@ class TopscoreButton(pygame.sprite.Sprite):
         self.image, self.rect = load_image('tbutton.png', -1)
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
-        self.rect.topleft = 160, 50
+        self.rect.topleft = 160, 80
         self.a = 0
     
     def update(self):
@@ -175,7 +175,8 @@ class TopscoreButton(pygame.sprite.Sprite):
         hitbox = self.rect.inflate(-5, -5)
         pos = pygame.mouse.get_pos()
         if hitbox.collidepoint(pos):
-            self.a = 1         
+            self.a = 1
+            return True         
 
 class StartButton(pygame.sprite.Sprite):
     def __init__(self):
@@ -193,4 +194,5 @@ class StartButton(pygame.sprite.Sprite):
         hitbox = self.rect.inflate(-5, -5)
         pos = pygame.mouse.get_pos()
         if hitbox.collidepoint(pos):
-            self.a = 1      
+            self.a = 1    
+            return True  

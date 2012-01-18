@@ -1,3 +1,5 @@
+import webbrowser
+
 def print_a_line(name, score):
     higscore = open('highscores.txt', 'a')
     score = str(score)
@@ -8,3 +10,10 @@ def print_a_line(name, score):
     
 def historic(score, name):
     print_a_line(name, score)
+
+def print_all():
+    a = open('highscores.txt', 'r')
+    return a.read()
+
+def print_in_browser():
+    webbrowser.open('data/highscore.txt')

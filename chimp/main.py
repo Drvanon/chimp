@@ -40,8 +40,6 @@ def main():
     render_main_menu.draw(screen)
     pygame.display.flip()
     
-    print pygame.display.get_surface()
-
     clock = pygame.time.Clock()
     whiff_sound = load_sound('whiff.wav')
     punch_sound = load_sound('punch.wav')
@@ -50,22 +48,27 @@ def main():
     while 1:
         if not button.a:
             button.update()
+            tbutton.update()
              
         if button.a:
             pygame.mouse.set_visible(0)
                  
         if main_menu.start_game:
             if pygame.font:
+                b = " times punched: %d, times hit: %d" % (TimesPunched, TimesHit)
                 background.fill((250, 250, 250))
                 screen.blit(background, (0, 0))
                 font = pygame.font.Font(None, 36)
-                text = font.render(" times punched: %d, times hit: %d" % (TimesPunched, TimesHit) , 1, (10, 10, 10,))
+                text = font.render(b , 1, (10, 10, 10,))
                 textpos = [100, 300]
                 background.blit(text, textpos)
                 screen.blit(background, (0, 0))
+        
+        if tbutton.a:
+            highscore.print_in_browser()
          
         if not main_menu.start_game:
-            pygame.mouse.set_visible(1)   
+            pygame.mouse.set_visible(1)
          
         clock.tick(60)                
          
@@ -77,10 +80,15 @@ def main():
                 return
             elif event.type == KEYDOWN and event.key == K_ESCAPE:
                 return
-                 
             elif event.type == MOUSEBUTTONDOWN:
                 if button.a == 1:
-                    main_menu.start_game = 1
+                    if button._click():
+                        main_menu.start_game = 1
+                    if tbutton._click():
+                        a = highscore.print_all()
+                        background.fill((250, 250, 250))
+                        screen.blit(background, (0, 0))
+                        pygame.display.flip()
                 if main_menu.start_game == 1:
                     if fist.punch(chimp):
                         punch_sound.play()
