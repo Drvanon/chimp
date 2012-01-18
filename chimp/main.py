@@ -66,6 +66,7 @@ def main():
         
         if tbutton.a:
             highscore.print_in_browser()
+            tbutton.a = 0
          
         if not main_menu.start_game:
             pygame.mouse.set_visible(1)
@@ -86,8 +87,6 @@ def main():
                         main_menu.start_game = 1
                     if tbutton._click():
                         a = highscore.print_all()
-                        background.fill((250, 250, 250))
-                        screen.blit(background, (0, 0))
                         pygame.display.flip()
                 if main_menu.start_game == 1:
                     if fist.punch(chimp):

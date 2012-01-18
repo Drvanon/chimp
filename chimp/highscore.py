@@ -1,7 +1,7 @@
 import webbrowser
 
 def print_a_line(name, score):
-    higscore = open('highscores.txt', 'a')
+    higscore = open('data/highscores.txt', 'a')
     score = str(score)
     higscore.write(score)
     higscore.write('\t')
