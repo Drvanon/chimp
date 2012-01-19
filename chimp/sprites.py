@@ -69,7 +69,7 @@ class Bomb(pygame.sprite.Sprite):
         self.image, self.rect = load_image('bomb.png', -1)
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
-        self.rect.topleft = 400, 60
+        self.rect.topleft = 400, 300
         self.move = [4, 5]
         self.hit = 0
         self.colliderate = 0

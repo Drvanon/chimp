@@ -16,4 +16,4 @@ def print_all():
     return a.read()
 
 def print_in_browser():
-    webbrowser.open('data/highscore.txt')
+    webbrowser.open('data/highscores.txt')

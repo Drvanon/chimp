@@ -65,8 +65,9 @@ def main():
                 screen.blit(background, (0, 0))
         
         if tbutton.a:
-            highscore.print_in_browser()
-            tbutton.a = 0
+            if not main_menu.start_game:
+                highscore.print_in_browser()
+                tbutton.a = 0
          
         if not main_menu.start_game:
             pygame.mouse.set_visible(1)

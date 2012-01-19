@@ -59,5 +59,4 @@ def ask(screen, question):
             display_box(screen, g)
             h = string.join(current_string)
             if inkey == K_RETURN:
-                h.replace(' ', '')
                 return h
